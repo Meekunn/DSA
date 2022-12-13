@@ -2,9 +2,11 @@
 
 int main() {
 
-	std::cout << "Hello World" << std::endl;
-
-	return 0;
+	// std::cout << "Hello World" << std::endl;
+	int a = 6;
+	++a;
+    std::cout << a << std::endl;
+  return 0;
 
 }
 
