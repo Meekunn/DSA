@@ -1,0 +1,325 @@
+
+// shape.h
+class Shape {
+    public:
+        Shape();
+        Shape(float x, float y);
+        ~Shape();
+    
+        float area();
+    
+    private:
+        float x;
+        float y;
+};
+
+// shape.cpp
+#include <iostream>
+Shape::Shape(){
+
+}
+        
+Shape::Shape(float x, float y){
+    this->x = x;
+    this->y = y;
+}
+Shape::~Shape(){
+
+}
+
+float Shape::area(){
+    float result = this->x * this-> y;
+}
+
+// main.cpp
+int main(){
+    
+    return 0;
+}
+
+//******************Inheritance********************
+
+#include <iostream>
+
+class Shape {   // Abstract Class
+    public:
+        Shape(){
+        
+        }
+             
+        Shape(int no_side){
+            this->no_side = no_side;
+            this->color = "Black";
+        }
+             
+        Shape(int no_side, std::string color){
+            this->no_side = no_side;
+            this->color = color;
+        }
+        ~Shape(){
+            
+        }
+             
+        int get_No_Sides(){
+            return this->no_side;
+        }
+        
+        // Pure Virtual Functions / Methods
+        virtual float area() = 0;   
+        virtual void print() = 0;
+    
+    protected:
+        std::string color;
+    
+    private:
+        int no_side;
+};
+
+class Triangle:public Shape {
+    public:
+        Triangle(){
+            
+        }
+    
+        Triangle(float base, float height):Shape(3){
+            this->base = base;
+            this->height = height;
+        }
+    
+        Triangle(float base, float height, std::string color):Shape(3, color){
+            this->base = base;
+            this->height = height;
+        }
+    
+        ~Triangle(){
+            
+        }
+    
+        float area(){
+            return 0.5 * this->base * this->height;;
+        }
+    
+        void print(){
+            std::cout << "**************Triangle**********************" << std::endl;
+            std::cout << "No of sides of the triangle is " << this->get_No_Sides() << std::endl;
+            std::cout << "Color of the triangle is " << this->color << std::endl;
+            std::cout << "Area of the triangle is: " << this->area() << std::endl;
+        }
+    
+    private:
+        float base;
+        float height;
+};
+    
+class Square:public Shape {
+    public:
+        Square(){
+            
+        }
+    
+        Square(float length):Shape(4){
+            this->length = length;
+        }
+    
+        Square(float length, std::string color):Shape(4, color){
+            this->length = length;
+        }
+        ~Square(){
+            
+        }
+        float area(){
+            float result = this->length * this->length;
+            return result;
+        }
+    
+        void print(){
+            std::cout << "**************Square**********************" << std::endl;
+            std::cout << "No of sides of the square is " << this->get_No_Sides() << std::endl;
+            std::cout << "Color of the square is " << this->color << std::endl;
+            std::cout << "Area of the square is: " << this->area() << std::endl;
+        }
+    private:
+        float length;
+};
+
+int main(){
+    Shape *shape1 = new Triangle(10, 5, "Red");
+    Shape *shape2 = new Square(10, "Blue");
+    
+    shape1->print();
+    shape2->print();
+    //float square_area = shape2->area();
+    //std::cout << "Area of the triangle is " << triangle_area << std::endl;
+    //std::cout << "Area of the square is " << square_area << std::endl;
+    
+    return 0;
+}
+
+//*********** Java Equivalent *******************
+
+public abstract class Shape {
+    private String color;
+    private int no_side;
+
+    public Shape() {
+    }
+
+    public Shape(int no_side) {
+        this.no_side = no_side;
+        this.color = "Black";
+    }
+
+    public Shape(int no_side, String color) {
+        this.no_side = no_side;
+        this.color = color;
+    }
+
+    public int getNoSides() {
+        return this.no_side;
+    }
+    
+    public String getColor() {
+        return this.color;
+    }
+
+    // Abstract methods
+    public abstract float area();
+    public abstract void print();
+}
+
+public class Triangle extends Shape {
+    private float base;
+    private float height;
+
+    public Triangle() {
+        super();
+    }
+
+    public Triangle(float base, float height) {
+        super(3);
+        this.base = base;
+        this.height = height;
+    }
+
+    public Triangle(float base, float height, String color) {
+        super(3, color);
+        this.base = base;
+        this.height = height;
+    }
+
+    public float area() {
+        return 0.5f * this.base * this.height;
+    }
+
+    public void print() {
+        System.out.println("**************Triangle**********************");
+        System.out.println("No of sides of the triangle is " + getNoSides());
+        System.out.println("Color of the triangle is " + getColor());
+        System.out.println("Area of the triangle is: " + area());
+    }
+}
+
+public class Square extends Shape {
+    private float length;
+
+    public Square() {
+        super();
+    }
+
+    public Square(float length) {
+        super(4);
+        this.length = length;
+    }
+
+    public Square(float length, String color) {
+        super(4, color);
+        this.length = length;
+    }
+
+    public float area() {
+        return this.length * this.length;
+    }
+
+    public void print() {
+        System.out.println("**************Square**********************");
+        System.out.println("No of sides of the square is " + getNoSides());
+        System.out.println("Color of the square is " + getColor());
+        System.out.println("Area of the square is: " + area());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape shape1 = new Triangle(10, 5, "Red");
+        Shape shape2 = new Square(10, "Blue");
+
+        shape1.print();
+        shape2.print();
+    }
+}
+
+
+/*
+Create a program that models shapes such as triangles and squares using C++ classes. The program should have the following classes:
+
+1. A base Shape class that has an area method and a draw method
+
+2. A Triangle class that inherits from Shape with the area and draw methods to calculate the area and draw a triangle shape using ASCII characters.
+    - With attributes 
+        - Base
+        - Height
+
+3. A Square class that also inherits from Shape with the area and draw methods to draw a square shape using ASCII characters.
+    - With attributes 
+        - Length
+
+*/
+
+/*
+Create a program that models shapes such as triangles and squares using C++ classes. The program should have the following classes:
+
+1. A base Shape class that has an area method and a draw method that is meant to be overridden by subclasses. Both methods should be an abstract method, which means it has no implementation and forces any subclass to provide its own implementation.
+
+2. A Triangle class that inherits from Shape and overrides the area and draw methods to calculate the area and draw a triangle shape using ASCII characters.
+
+3. A Square class that also inherits from Shape and overrides the area and draw methods to draw a square shape using ASCII characters.
+
+*/
+
+/*****************************************************/
+#include <iostream>
+
+template <typename T>
+T sum (T a, T b){
+    return a + b;
+}
+
+template <typename T>
+class Vector {
+    public:
+        Vector(){
+        
+        }
+             
+        Vector(int *array, int N){
+            this->array = new T[N];
+        }
+            ~Vector(){
+            delete array;
+        }
+    
+    private:
+        T *array;
+        int size;
+};
+
+std::vector<std::vector<int>> vector;
+vector.push_back(5);
+
+/**************************const***************************/
+void print() const{
+    for(int i = 0; i < this->size; i++)
+        std::cout << this->array[i] << " ";
+    std::cout << std::endl;
+    
+}
